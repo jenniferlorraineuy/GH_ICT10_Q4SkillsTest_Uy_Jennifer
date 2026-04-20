@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Attendance Tracker</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://pyscript.net/releases/2025.7.3/core.css">
+    <script type="module" src="https://pyscript.net/releases/2025.7.3/core.js"></script>
+
+    <py-config>
+        packages = ["numpy", "matplotlib"]
+    </py-config>
+</head>
+<body>
+
+    <div class="wrapper">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <h1>Attendance<br>Tracker</h1>
+                <p class="section-name">BSIT 2-A</p>
+            </div>
+
+            <nav class="day-nav">
+                <p class="nav-label">Select Day</p>
+                <select id="day-select">
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                </select>
+
+                <p class="nav-label" style="margin-top:16px">Absences</p>
+                <input type="number" id="absence-input" min="0" placeholder="0">
+
+                <button py-click="log_absence">Log</button>
+                <div id="status-message"></div>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <div class="progress-track">
+                    <div class="progress-fill" id="progress-bar"></div>
+                </div>
+                <p class="progress-label" id="progress-label">0 / 5 days logged</p>
+            </div>
+        </aside>
+
+        <!-- Main content -->
+        <main class="main">
+
+            <!-- Stats row -->
+            <div class="stats-row">
+                <div class="stat-box">
+                    <span class="stat-val" id="stat-total">0</span>
+                    <span class="stat-lbl">Total Absences</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-val" id="stat-logged">0</span>
+                    <span class="stat-lbl">Days Logged</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-val" id="stat-avg">—</span>
+                    <span class="stat-lbl">Daily Average</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-val" id="stat-peak">—</span>
+                    <span class="stat-lbl">Peak Day</span>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="table-wrap">
+                <div class="table-header">
+                    <span>Weekly Log</span>
+                </div>
+                <table id="summary-table">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Absences</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="summary-body"></tbody>
+                </table>
+            </div>
+
+            <!-- Graph -->
+            <div class="graph-wrap">
+                <div class="table-header">
+                    <span>Absence Graph</span>
+                    <button py-click="show_graph" class="btn-graph">Generate</button>
+                </div>
+                <div id="graph-output"></div>
+            </div>
+
+        </main>
+
+    </div>
+
+    <py-script src="main.py"></py-script>
+
+</body>
+</html>
