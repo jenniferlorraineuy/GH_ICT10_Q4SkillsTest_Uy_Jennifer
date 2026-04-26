@@ -108,4 +108,26 @@ def show_graph(event):
             markersize=8, markerfacecolor='#1c1c30',
             markeredgecolor='#7b6ef6', markeredgewidth=2)
 
-    ax.fill_between(day_labels,
+    ax.fill_between(day_labels, absence_values,
+                    alpha=0.15, color='#4a9e4a')
+
+    ax.set_xlabel('Day', color='#4a7a4a', fontsize=9)
+    ax.set_ylabel('Absences', color='#4a7a4a', fontsize=9)
+    ax.tick_params(colors='#4a7a4a', labelsize=8)
+
+    for spine in ax.spines.values():
+        spine.set_edgecolor('#1e3a1e')
+
+    ax.yaxis.set_major_locator(plt.MaxNLocator(integer=True))
+    ax.grid(axis='y', color='#1e3a1e', linestyle='--', linewidth=0.7)
+
+    plt.tight_layout()
+
+    graph_output = document.getElementById('graph-output')
+    graph_output.innerHTML = ''
+    display(fig, target='graph-output', append=False)
+    plt.close(fig)
+
+update_table()
+update_progress()
+update_stats()
